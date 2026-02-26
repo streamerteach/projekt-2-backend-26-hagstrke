@@ -16,6 +16,9 @@
             <div id="logo"><a href="./">Healthy dating</a></div>
             <nav>
                 <ul>
+                    <a href="./home">
+                        <li>Home</li>
+                    </a>
                     <a href="./rapport.php">
                         <li>Rapport</li>
                     </a>
