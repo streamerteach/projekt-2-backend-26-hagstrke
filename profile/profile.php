@@ -1,7 +1,7 @@
 <?php
 if (!empty($_SESSION['username'])) {
     print("<h1>Welcome " . $_SESSION['username'] . "</h1>");
-    if ($_COOKIE['additional_cookies'] == "yes") {
+    if (!empty($_COOKIE['additional_cookies']) && $_COOKIE['additional_cookies'] == "yes") {
         if (!empty($_COOKIE['last_visit'])) {
             print("<p>Your last visit was " . $_COOKIE['last_visit'] . "</p>");
             setcookie("last_visit", date("d/m/Y"), 0, "/");
