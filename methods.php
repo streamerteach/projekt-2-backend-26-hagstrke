@@ -30,3 +30,17 @@ if (!preg_match('/' . $_SERVER['REMOTE_ADDR'] . '/', fread($visitors, filesize($
 }
 
 fclose($visitors);
+
+$servername = "localhost";
+$dbname   = "hagstrke";
+$username = "hagstrke";
+$password = "DFzmk7g6zG";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
