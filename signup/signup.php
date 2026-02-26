@@ -15,16 +15,14 @@ if (! empty($_REQUEST['form'])) {
                 $username = test_input($_POST['username']);
                 $password = test_input($_POST['password']);
 
-                $accounts = fopen("accounts.json", "a+") or die("Error: Unable to open file!");
-                $accountsArray = json_decode(fread($accounts, filesize("accounts.json") + 1), true);
-                fclose($accounts);
+                $sql = "SELECT * FROM profiles WHERE username = ?";
+                $result = $conn->prepare($sql);
+                $result->execute([$_POST['username']]);
+                $row = $result->fetch();
 
-                if ($accountsArray == null) {
-                    $accountsArray = array();
-                }
-
-                if (array_key_exists($username, $accountsArray)) {
-                    if ($accountsArray[$username] == $password) {
+                if (!empty($row)) {
+                    $passhash = $row['passhash'];
+                    if (password_verify($password, $passhash)) {
                         $_SESSION['username'] = $username;
                         header("Location: ../profile");
                     } else {
